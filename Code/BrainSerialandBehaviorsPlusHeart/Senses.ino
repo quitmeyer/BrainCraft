@@ -9,8 +9,37 @@ void paintBrain (){
 
 }
 
+
+
+
+
+
+//Measured Senses
+
+void heartBeat(){
+  heartPWRreading = analogRead(heartPin);
+
+//adding some nice ramping to the pulse beats
+if(heartPWRreading> 20){
+  heartPWR = heartPWR+50;
+ heartPWR =  constrain(heartPWR , 0 , 200);
+}
+else{
+  heartPWR = heartPWR-20;
+  heartPWR =   constrain(heartPWR , 0 , 200);
+
+}
+Serial.println(heartPWR);
+
+//heartPWR = map(analogRead(heartPin),0,1023,0,200);
+
+}
+
+
+
+
 //Simulated Senses
-void heartBeat(float tempo){
+void heartBeatS(float tempo){
     if ((millis() - prevMillis) > (long)(heartBeatArray[hbeatIndex] * tempo)){
         hbeatIndex++;
         if (hbeatIndex > 3) hbeatIndex = 0;

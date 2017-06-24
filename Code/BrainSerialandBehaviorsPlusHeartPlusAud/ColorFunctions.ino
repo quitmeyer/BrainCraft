@@ -1,4 +1,68 @@
 
+
+
+//Mapped Out areas of the brain + add a bit randomness to their borders
+void areasoftheBrainAnimated() {
+  for (int i = 0; i < NUMPIXELS; i++) {
+
+    char* type = LLobe[i];
+
+
+//External Brain
+    if (type[0] == 'f') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i, strip.Color(heartPWR, heartPWR, heartPWR));
+    }
+    
+    //Internal Brain
+    else {
+      strip.setPixelColor(i, strip.Color(0, 100+random(30), 100+random(30)));
+
+    }
+   if (type[1] == 'v') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i+random(2), strip.Color(0, 150+random(40), random(10)));
+    }
+    
+    //speech
+ if (type[1] == 's') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i, strip.Color(10, 200+random(20), 0));
+    }
+    
+//auditory
+ if (type[1] == 'a') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i, strip.Color(120, eegPWR, 200));
+    }
+
+
+//thinking
+ if (type[1] == 't') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i, strip.Color(0, eegPWR-100+random(10), eegPWR));
+    }
+    
+//moving
+ if (type[1] == 'm') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i+random(1), strip.Color(0, random(20), heartPWR));
+    }
+
+//coordination
+ if (type[1] == 'c') {
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      strip.setPixelColor(i, strip.Color(0, 200, 200));
+    }
+
+    
+
+
+  }
+  //Finally turn on the whole strip with the values
+    strip.show(); // This sends the updated pixel color to the hardware.
+}
+
 //Mapped Out areas of the brain
 void areasoftheBrain() {
   for (int i = 0; i < NUMPIXELS; i++) {
@@ -65,69 +129,6 @@ void areasoftheBrain() {
     strip.show(); // This sends the updated pixel color to the hardware.
 
 }
-
-//Mapped Out areas of the brain + add a bit randomness to their borders
-void areasoftheBrainAnimated() {
-  for (int i = 0; i < NUMPIXELS; i++) {
-
-    char* type = LLobe[i];
-
-
-//External Brain
-    if (type[0] == 'f') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i, strip.Color(10, 10, 10));
-    }
-    
-    //Internal Brain
-    else {
-      strip.setPixelColor(i, strip.Color(0, 100+random(30), 100+random(30)));
-
-    }
-   if (type[1] == 'v') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i+random(2), strip.Color(0, 150+random(40), random(10)));
-    }
-    
-    //speech
- if (type[1] == 's') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i, strip.Color(10, 200+random(20), 0));
-    }
-    
-//auditory
- if (type[1] == 'a') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i, strip.Color(200, heartPWR, 200));
-    }
-
-
-//thinking
- if (type[1] == 't') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i, strip.Color(0, 00, breathPWR*.7));
-    }
-    
-//moving
- if (type[1] == 'm') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i+random(1), strip.Color(0, random(20), 200));
-    }
-
-//coordination
- if (type[1] == 'c') {
-      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-      strip.setPixelColor(i, strip.Color(0, 200, 200));
-    }
-
-    
-
-
-  }
-  //Finally turn on the whole strip with the values
-    strip.show(); // This sends the updated pixel color to the hardware.
-}
-
 
 //Theatre-style crawling lights with rainbow effect
 void theaterChaseRainbow(uint8_t wait) {

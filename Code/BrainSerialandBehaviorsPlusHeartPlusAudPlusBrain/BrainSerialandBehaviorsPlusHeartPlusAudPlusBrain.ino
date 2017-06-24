@@ -118,6 +118,10 @@ char* RLobe[NUMPIXELS] = {"fv_0", "fv_1", "fv_2", "fv_3", "fv_4", "fv_5", "fc_6"
                           "ft_110", "ft_111", "ft_112", "ft_113", "ft_114", "ft_115", "ft_116", "ft_117", "ft_118", "ft_119"
                          };
 
+
+
+
+
 //Simulated Senses - From recordings and for demo purposes
 
 /*
@@ -125,6 +129,7 @@ char* RLobe[NUMPIXELS] = {"fv_0", "fv_1", "fv_2", "fv_3", "fv_4", "fv_5", "fc_6"
  */
 
  int heartPWR = 0;
+ int heartPWRreading = 500;
 long heartBeatArray[] = {
     50, 100, 15, 1200};
 int hbeatIndex = 1;    // this initialization is not important  
@@ -148,24 +153,27 @@ const byte breathLED = 13;
 // define directions for LED fade
 #define UP 0
 #define DOWN 1
- 
+ #define bUP 0
+#define bDOWN 1
+
 // constants for min and max PWM
 const int minPWM = 0;
 const int maxPWM = 255;
  
 // State Variable for Fade Direction
 byte fadeDirection = UP;
- 
+ byte bfadeDirection = UP;
+
 
  
 // How smooth to fade?
-byte fadeIncrement = 5;
+byte fadeIncrement = 50;
  
 // millis() timing Variable, just for fading
 unsigned long previousFadeMillis;
  
 // How fast to increment?
-int fadeInterval = 30;
+double fadeInterval = 40;
  
 
  
@@ -175,6 +183,21 @@ int fadeInterval = 30;
  /*
   * Brainwaves
   */
+
+int eegPin = A1;
+
+int eegPWR = 0;
+int eegReading = 0;
+//beta focused on a task - 13-30hz
+//Alpha Relaxed - eyes closed   8-13 hz
+//theta - meditative 4-8 hz
+//delta - like reach nirvana kinda really good at meditation - .5-4hz
+int waveFreq = 30; // start at beta in hz
+
+  //Measured Senses
+
+  //heart rate
+  int heartPin=A0;
 
 
 void setup() {
@@ -222,8 +245,12 @@ void loop() {
 
   //Present Mode
   
-    breathFade(currentMillis);
-    heartBeat(.8);     
+    //breathFade(currentMillis);
+        brainWave(currentMillis);
+
+    heartBeat();
+ //   eegBASIC();
+//    heartBeatS(.8);     
 
 paintBrain();
 

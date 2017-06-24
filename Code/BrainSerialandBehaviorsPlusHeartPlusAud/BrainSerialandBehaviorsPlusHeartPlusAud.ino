@@ -118,6 +118,10 @@ char* RLobe[NUMPIXELS] = {"fv_0", "fv_1", "fv_2", "fv_3", "fv_4", "fv_5", "fc_6"
                           "ft_110", "ft_111", "ft_112", "ft_113", "ft_114", "ft_115", "ft_116", "ft_117", "ft_118", "ft_119"
                          };
 
+
+
+
+
 //Simulated Senses - From recordings and for demo purposes
 
 /*
@@ -125,6 +129,7 @@ char* RLobe[NUMPIXELS] = {"fv_0", "fv_1", "fv_2", "fv_3", "fv_4", "fv_5", "fc_6"
  */
 
  int heartPWR = 0;
+ int heartPWRreading = 500;
 long heartBeatArray[] = {
     50, 100, 15, 1200};
 int hbeatIndex = 1;    // this initialization is not important  
@@ -176,6 +181,16 @@ int fadeInterval = 30;
   * Brainwaves
   */
 
+int eegPin = A1;
+
+int eegPWR = 0;
+
+
+  //Measured Senses
+
+  //heart rate
+  int heartPin=A0;
+
 
 void setup() {
 
@@ -223,7 +238,9 @@ void loop() {
   //Present Mode
   
     breathFade(currentMillis);
-    heartBeat(.8);     
+    heartBeat();
+    eegBASIC();
+//    heartBeatS(.8);     
 
 paintBrain();
 
